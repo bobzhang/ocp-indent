@@ -64,6 +64,7 @@ module Node = struct
     | KTry
     | KWith of kind
     | KLoop
+    | KSHARP_IF
     | KIf
     | KThen
     | KElse
@@ -140,6 +141,7 @@ module Node = struct
     | KElse -> "KElse"
     | KDo -> "KDo"
     | KFun -> "KFun"
+    | KSHARP_IF -> "KSHARP_IF"
     | KWhen -> "KWhen"
     | KExternal -> "KExternal"
     | KCodeInComment -> "KCodeInComment"
@@ -791,6 +793,7 @@ let rec update_path config block stream tok =
   handle_dotted block tok >>! fun () ->
   match tok.token with
   | SEMISEMI    -> append KUnknown L ~pad:0 (unwind_top block.path)
+  | SHARP_IF    -> append KSHARP_IF L ~pad:0 (unwind_top block.path)
   | INCLUDE     -> append KInclude L (unwind_top block.path)
   | EXCEPTION   ->
       (match last_token block with

@@ -467,6 +467,8 @@ rule parse_token = parse
       { update_loc lexbuf None 1 false 0;
         LINE_DIRECTIVE
       }
+  | "#if" | "#end" | "#use" | "#elif" | "#else"
+         { SHARP_IF }   
   | "#"  { SHARP }
   | "&"  { AMPERSAND }
   | "&&" { AMPERAMPER }

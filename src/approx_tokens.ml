@@ -131,6 +131,7 @@ type token =
   | SEMI
   | SEMISEMI
   | SHARP
+  | SHARP_IF
   | SIG
   | STAR
   | STRING of (string)
@@ -261,6 +262,7 @@ let to_string = function
   | SEMI -> "SEMI"
   | SEMISEMI -> "SEMISEMI"
   | SHARP -> "SHARP"
+  | SHARP_IF -> "SHARP_IF"
   | SIG -> "SIG"
   | STAR -> "STAR"
   | STRING _ -> "STRING"
