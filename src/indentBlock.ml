@@ -76,7 +76,7 @@ module Node = struct
     | KExtendedExpr of string list * extension_kind
     | KExtendedItem of string list * extension_kind
     | KAttrId of string list * bool
-
+  let _ = KSHARP_IF
   (* Priority of open expression constructs (see below for operators) *)
   let prio = function
     | KIn | KArrow _ -> 0
@@ -793,7 +793,7 @@ let rec update_path config block stream tok =
   handle_dotted block tok >>! fun () ->
   match tok.token with
   | SEMISEMI    -> append KUnknown L ~pad:0 (unwind_top block.path)
-  | SHARP_IF    -> append KSHARP_IF L ~pad:0 (unwind_top block.path)
+  | SHARP_IF    -> append KUnknown (A 0) ~pad:0 block.path    
   | INCLUDE     -> append KInclude L (unwind_top block.path)
   | EXCEPTION   ->
       (match last_token block with
